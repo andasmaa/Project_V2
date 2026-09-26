@@ -1,0 +1,30 @@
+# =============================================================================
+# Governance / audit layer dependencies
+#
+# Install with:  pip install -r requirements-governance.txt
+# (in addition to the existing backend/requirements.txt)
+#
+# Kept in a SEPARATE file from requirements.txt on purpose: Presidio pulls in
+# spaCy + a language model (~50-500MB) and is only needed if
+# GOVERNANCE_PRESIDIO_ENABLED=true. The core governance layer (hash chain,
+# risk policy, Postgres storage, dashboard) works without it, using only the
+# teammate's existing regex-based _pseudonymize_message().
+# =============================================================================
+
+# PostgreSQL driver for the audit store
+# psycopg2-binary ships prebuilt wheels for Windows/Mac/Linux, so no build
+# toolchain is needed. Must match the `import psycopg2` used throughout
+# the governance/ code -- do NOT swap this for psycopg3 (package name
+# `psycopg`) without also porting every governance/*.py import.
+psycopg2-binary==2.9.9
+
+# Compliance dashboard
+streamlit==1.38.0
+plotly==5.24.1
+
+# --- Optional: PII entity-type enrichment (GOVERNANCE_PRESIDIO_ENABLED=true) --
+# presidio-analyzer==2.2.354
+# presidio-anonymizer==2.2.354
+# spacy==3.7.5
+# After installing, download a French model:
+#   python -m spacy download fr_core_news_md

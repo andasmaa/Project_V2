@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Runtime / generated data
+audit_logs.json
+
+# Archives
+*.zip
+
+# Frontend build/cache
+frontend/dist/
+frontend/.vite/
+frontend/node_modules/.vite/
